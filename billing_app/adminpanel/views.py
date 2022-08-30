@@ -6,3 +6,8 @@ from django.views import View
 
 def index(request):
     return render(request, "adminpanel/index.html")
+
+
+class InventoryView(View):
+    def get(self, request):
+        return render(request, "adminpanel/viewinventory.html")

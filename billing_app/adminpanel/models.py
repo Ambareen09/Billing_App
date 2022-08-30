@@ -89,7 +89,8 @@ class Vendor(Base):
 
 
 class Staff(Base):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='staff_name')
     type = models.ForeignKey(
         StaffType, on_delete=models.CASCADE, related_name='staffType')
     email = models.EmailField(null=True, blank=True)
