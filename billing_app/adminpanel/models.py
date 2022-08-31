@@ -23,13 +23,22 @@ class Base(models.Model):
 class PayMode(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.name)
+
 
 class StaffType(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
 
+    def __str__(self):
+        return str(self.name)
+
 
 class VendorType(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)
 
 
 class Inventory(Base):
@@ -40,7 +49,7 @@ class Inventory(Base):
     item_tax = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.item_name
+        return str(self.item_name)
 
 
 class Billing(Base):
@@ -58,6 +67,9 @@ class Billing(Base):
     customer_name = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='name')
 
+    def __str__(self):
+        return str(self.item_name)
+
 
 class Expense(Base):
     expense_type = models.CharField(max_length=256, null=True, blank=True)
@@ -67,6 +79,9 @@ class Expense(Base):
     payment_mode = models.ForeignKey(
         PayMode, on_delete=models.CASCADE, related_name='payment_mode')
     notes = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.vendor)
 
 
 class Salary(Base):
@@ -79,6 +94,9 @@ class Salary(Base):
         PayMode, on_delete=models.CASCADE, related_name='paymode')
     notes = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return str(self.staff)
+
 
 class Vendor(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
@@ -86,6 +104,9 @@ class Vendor(Base):
         VendorType, on_delete=models.CASCADE, related_name='vendor_type')
     phone_number = models.CharField(max_length=256, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)
 
 
 class Staff(Base):
@@ -95,8 +116,14 @@ class Staff(Base):
         StaffType, on_delete=models.CASCADE, related_name='staffType')
     email = models.EmailField(null=True, blank=True)
 
+    def __str__(self):
+        return str(self.user)
+
 
 class Customer(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
     phone_number = models.CharField(max_length=256, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.name)
