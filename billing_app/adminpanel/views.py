@@ -56,3 +56,8 @@ class StaffView(View):
 class CustomerView(View):
     def get(self, request):
         return render(request, "adminpanel/customer.html")
+
+
+class ItemView(View):
+    def get(self, request):
+        return render(request, "adminpanel/viewitem.html")

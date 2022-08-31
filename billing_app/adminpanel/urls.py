@@ -24,4 +24,6 @@ urlpatterns = [
          name="staff"),
     path("customer", views.CustomerView.as_view(),
          name="customer"),
+    path("viewitem", views.ItemView.as_view(),
+         name="viewitem"),
 ]
