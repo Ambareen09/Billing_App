@@ -27,7 +27,7 @@
           <div class="m-md-4 m-2 mt-3">
             <div class="table-responsive">
               <div id="addnew" class="addnew">
-                <a href="addvendor.html" id="remove" class="btn btn-blue">
+                <a href="addvendor" id="remove" class="btn btn-blue">
                   Add Vendor
                 </a>
               </div>
@@ -45,34 +45,26 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for v in vendor %}
                   <tr>
-                    <td>VI73635</td>
-                    <td>Vetrivel</td>
-                    <td>Supplier</td>
-                    <td>+91 7544675446</td>
-                    <td>vetrivel@gmail.com</td>
-                    <td class="text-success">Active</td>
+                    <td>{{v.id}}</td>
+                    <td>{{v.name}}</td>
+                    <td>{{v.vendor_type}}</td>
+                    <td>{{v.phone_number}}</td>
+                    <td>{{v.email}}</td>
+                    {% if v.status == "ACTIVE" %}
+                    <td class="text-success">{{v.status}}</td>
+                    {% else %}
+                    <td class="text-danger">{{v.status}}</td>
+                    {% endif %}
                     <td>
                       <div class="dropdown">
-                        <a href="viewvendor.html" class="btn btn-primary me-md-2">View</button>
+                        <a href="viewvendor" class="btn btn-primary me-md-2">View</button>
                         </a>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>VI73635</td>
-                    <td>Vetrivel</td>
-                    <td>Supplier</td>
-                    <td>+91 7544675446</td>
-                    <td>vetrivel@gmail.com</td>
-                    <td class="text-success">Active</td>
-                    <td>
-                      <div class="dropdown">
-                        <a href="viewvendor.html" class="btn btn-primary me-md-2">View</button>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -104,8 +96,8 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

@@ -45,34 +45,22 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for s in salary %}
                   <tr>
-                    <td>Anandraj</td>
-                    <td>Permananent</td>
-                    <td>14-03-2022</td>
-                    <td>10000</td>
-                    <td>Cash</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                    <td>{{s.staff}}</td>
+                    <td>{{s}}</td>
+                    <td>{{s.date}}</td>
+                    <td>{{s.amount}}</td>
+                    <td>{{s.payment_mode}}</td>
+                    <td>{{s.notes}}</td>
                     <td>
                       <div class="dropdown">
-                        <a href="viewsalary.html" class="btn btn-primary me-md-2">View</button>
+                        <a href="viewsalary" class="btn btn-primary me-md-2">View</button>
                         </a>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Kaviraj</td>
-                    <td>Temporary</td>
-                    <td>14-03-2022</td>
-                    <td>1000</td>
-                    <td>Cash</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                    <td>
-                      <div class="dropdown">
-                        <a href="viewsalary.html" class="btn btn-primary me-md-2">View</button>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -104,8 +92,8 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

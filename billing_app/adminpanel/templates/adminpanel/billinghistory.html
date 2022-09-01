@@ -44,32 +44,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for b in billinghistory %}
+                  {% if b.status == 'PAID' %}
                   <tr>
-                    <td>BN73635</td>
-                    <td>14-04-2021 / 12:03:30 AM</td>
+                    <td>{{b.id}}</td>
+                    <td>{{b.billDate}}</td>
                     <td>3600</td>
-                    <td>Cash</td>
-                    <td class="text-success">Paid</td>
+                    <td>{{b.payment_mode}}</td>
+                    <td class="text-success">{{b.status}}</td>
                     <td>
                       <div class="dropdown">
-                        <a href="viewbill.html" class="btn btn-primary me-md-2">View Bill</button>
+                        <a href="viewbill" class="btn btn-primary me-md-2">View Bill</button>
                         </a>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>BN73735</td>
-                    <td>14-04-2021 / 12:30:30 AM</td>
-                    <td>4000</td>
-                    <td>Card</td>
-                    <td class="text-success">Paid</td>
-                    <td>
-                      <div class="dropdown">
-                        <a href="viewbill.html" class="btn btn-primary me-md-2">View Bill</button>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
+                  {% endif %}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -101,8 +92,8 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>
