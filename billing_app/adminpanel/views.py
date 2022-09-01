@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.forms import model_to_dict
+from adminpanel.models import Inventory
+
 
 # Create your views here.
 
@@ -10,7 +13,12 @@ def index(request):
 
 class InventoryView(View):
     def get(self, request):
-        return render(request, "adminpanel/viewinventory.html")
+        inventory = [model_to_dict(b) for b in Inventory.objects.all()]
+        return render(
+            request,
+            "adminpanel/viewinventory.html",
+            {"inventory": inventory},
+        )
 
 
 class AddInventoryView(View):
@@ -61,3 +69,8 @@ class CustomerView(View):
 class ItemView(View):
     def get(self, request):
         return render(request, "adminpanel/viewitem.html")
+
+
+class AddStockView(View):
+    def get(self, request):
+        return render(request, "adminpanel/addstock.html")

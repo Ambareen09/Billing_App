@@ -1,9 +1,10 @@
 from django.contrib import admin
 
-from adminpanel.models import Billing, Customer, Expense, PayMode, Salary, Staff, Vendor, VendorType
+from adminpanel.models import Billing, Customer, Expense, Inventory, PayMode, Salary, Staff, Vendor, VendorType
 
 # Register your models here.
 
+admin.site.register(Inventory)
 admin.site.register(Customer)
 admin.site.register(Staff)
 admin.site.register(Vendor)

@@ -26,4 +26,6 @@ urlpatterns = [
          name="customer"),
     path("viewitem", views.ItemView.as_view(),
          name="viewitem"),
+    path("addstock", views.AddStockView.as_view(),
+         name="addstock"),
 ]

@@ -2,7 +2,7 @@
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index" class="app-brand-link ms-3" style="text-decoration: none;">
+        <a href="/" class="app-brand-link ms-3" style="text-decoration: none;">
             <img src="images/logo.png" alt="" width="30">
             <span style="font-size: 20px;">BILLING</span>
         </a>
@@ -18,8 +18,8 @@
 
     <ul class="menu-inner">
         <!-- Dashboard -->
-        <li class="menu-item">
-            <a href="index" class="menu-link">
+        <li {% if request.path == '/' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3" {% endif %}>
+            <a href="/" class="menu-link">
                 <i class="fas fa-home-lg-alt me-3"></i>
                 <div>Dashboard</div>
             </a>
@@ -29,13 +29,15 @@
         <li class="menu-item mt-4 ms-3">
             <span style="color:rgb(107, 107, 107)">- INVENTORY</span>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/addinventory' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="addinventory" class="menu-link">
                 <i class="fas fa-cart-plus me-3"></i>
                 <div>Add Inventory</div>
             </a>
         </li>
-        <li class="menu-item mt-3 active">
+        <li {% if request.path == '/viewinventory' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="viewinventory" class="menu-link">
                 <i class="fas fa-shopping-cart me-3"></i>
                 <div>View Inventory</div>
@@ -46,13 +48,15 @@
         <li class="menu-item mt-4 ms-3">
             <span style="color:rgb(107, 107, 107)">- BILLING</span>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/addbilling' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="addbilling" class="menu-link">
                 <i class="fas fa-money-bill-wave me-3"></i>
                 <div>Add Billing</div>
             </a>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/billinghistory' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="billinghistory" class="menu-link">
                 <i class="fas fa-receipt me-3"></i>
                 <div>Billing History</div>
@@ -63,19 +67,22 @@
         <li class="menu-item mt-4 ms-3">
             <span style="color:rgb(107, 107, 107)">- FINANCE</span>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/expense' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="expense" class="menu-link">
                 <i class="fas fa-wallet me-3"></i>
                 <div>Expense</div>
             </a>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/salary' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="salary" class="menu-link">
                 <i class="fas fa-money-bill-wave me-3"></i>
                 <div>Salary</div>
             </a>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/pendingbills' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="pendingbills" class="menu-link">
                 <i class="fas fa-file-invoice-dollar me-3"></i>
                 <div>Pending Bills</div>
@@ -86,19 +93,22 @@
         <li class="menu-item mt-4 ms-3">
             <span style="color:rgb(107, 107, 107)">- OTHERS</span>
         </li>
-        <li class="menu-item mt-3">
+        <li {% if request.path == '/vendor' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="vendor" class="menu-link">
                 <i class="fas fa-user-tie me-3"></i>
                 <div>Vendor</div>
             </a>
         </li>
-        <li class="menu-item mt-3 mb-3">
+        <li {% if request.path == '/staff' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="staff" class="menu-link">
                 <i class="fas fa-users me-3"></i>
                 <div>Staff</div>
             </a>
         </li>
-        <li class="menu-item mt-3 mb-3">
+        <li {% if request.path == '/customer' %} class="menu-item mt-3 active" {% else %} class="menu-item mt-3"
+            {% endif %}>
             <a href="customer" class="menu-link">
                 <i class="fas fa-users me-3"></i>
                 <div>Customer</div>
