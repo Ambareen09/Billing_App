@@ -45,34 +45,26 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for c in customer %}
                   <tr>
-                    <td>CI73635</td>
-                    <td>Vetrivel</td>
+                    <td>{{c.id}}</td>
+                    <td>{{c.name}}</td>
                     <td>20</td>
-                    <td>+91 7544675446</td>
-                    <td>vetrivel@gmail.com</td>
-                    <td class="text-success">Active</td>
+                    <td>{{c.phone_number}}</td>
+                    <td>{{c.email}}</td>
+                    {% if c.status == "ACTIVE" %}
+                    <td class="text-success">{{c.status}}</td>
+                    {% else %}
+                    <td class="text-danger">{{c.status}}</td>
+                    {% endif %}
                     <td>
                       <div class="dropdown">
-                        <a href="viewcustomer.html" class="btn btn-primary me-md-2">View</button>
+                        <a href="viewcustomer" class="btn btn-primary me-md-2">View</button>
                         </a>
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>VI73635</td>
-                    <td>Vetrivel</td>
-                    <td>10</td>
-                    <td>+91 7544675446</td>
-                    <td>vetrivel@gmail.com</td>
-                    <td class="text-success">Active</td>
-                    <td>
-                      <div class="dropdown">
-                        <a href="viewcustomer.html" class="btn btn-primary me-md-2">View</button>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

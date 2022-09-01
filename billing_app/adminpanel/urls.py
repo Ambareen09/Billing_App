@@ -36,6 +36,8 @@ urlpatterns = [
          name="customer"),
     path("addcustomer", views.AddCustomerView.as_view(),
          name="addcustomer"),
+    path("viewcustomer", views.ViewCustomerView.as_view(),
+         name="viewcustomer"),
     path("viewitem", views.ItemView.as_view(),
          name="viewitem"),
     path("addstock", views.AddStockView.as_view(),

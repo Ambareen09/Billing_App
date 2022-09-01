@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.forms import model_to_dict
-from adminpanel.models import Billing, Expense, Inventory, Salary, Staff, Vendor
+from adminpanel.models import Billing, Customer, Expense, Inventory, Salary, Staff, Vendor
 from adminpanel.serializers import (
     BillingDetailSerializer
 )
@@ -121,12 +121,24 @@ class ViewStaffView(View):
 
 class CustomerView(View):
     def get(self, request):
+        customer = Customer.objects.all()
+        return render(
+            request,
+            "adminpanel/customer.html",
+            {"customer": customer},
+        )
+
         return render(request, "adminpanel/customer.html")
 
 
 class AddCustomerView(View):
     def get(self, request):
         return render(request, "adminpanel/addcustomer.html")
+
+
+class ViewCustomerView(View):
+    def get(self, request):
+        return render(request, "adminpanel/viewcustomer.html")
 
 
 class ItemView(View):
