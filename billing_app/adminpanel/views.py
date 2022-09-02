@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect
+import traceback
+
 from django.views import View
 from django.forms import model_to_dict
 from adminpanel.models import Billing, Customer, Expense, Inventory, Salary, Staff, Vendor
 from adminpanel.serializers import (
-    BillingDetailSerializer
+    BillingDetailSerializer,
+    InventoryDetailSerializer
 )
+from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
 
 # Create your views here.
@@ -12,6 +19,15 @@ from adminpanel.serializers import (
 
 def index(request):
     return render(request, "adminpanel/index.html")
+
+
+class BaseAPIView(APIView):
+    def handle_exception(self, exc):
+        try:
+            return super(BaseAPIView, self).handle_exception(exc)
+        except Exception as e:
+            tb = traceback.format_exc()
+            return Response({"error": tb}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class InventoryView(View):
@@ -24,9 +40,16 @@ class InventoryView(View):
         )
 
 
-class AddInventoryView(View):
+class AddInventoryView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addinventory.html")
+
+    def post(self, request):
+        serializer = InventoryDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('/viewinventory')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AddBillingView(View):
