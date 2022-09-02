@@ -14,6 +14,8 @@ urlpatterns = [
          name="billinghistory"),
     path("expense", views.ExpenseView.as_view(),
          name="expense"),
+    path("addexpense", views.AddExpenseView.as_view(),
+         name="addexpense"),
     path("salary", views.SalaryView.as_view(),
          name="salary"),
     path("pendingbills", views.PendingBillsView.as_view(),

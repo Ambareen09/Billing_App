@@ -60,6 +60,19 @@ class VendorType(Base):
         return str(self.name)
 
 
+class Vendor(Base):
+    name = models.CharField(max_length=256, null=True, blank=True)
+    vendor_type = models.ForeignKey(
+        VendorType, on_delete=models.CASCADE, related_name='vendor_type')
+    phone_number = models.CharField(max_length=256, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    status = models.CharField(choices=ACTIVITY_STATUS,
+                              max_length=255, null=True)
+
+    def __str__(self):
+        return str(self.name)
+
+
 class Customer(Base):
     name = models.CharField(max_length=256, null=True, blank=True)
     phone_number = models.CharField(max_length=256, null=True, blank=True)
@@ -108,7 +121,8 @@ class Billing(Base):
 class Expense(Base):
     expense_type = models.ForeignKey(
         ExpenseType, on_delete=models.CASCADE, related_name='expense_type', null=True, blank=True)
-    vendor = models.CharField(max_length=256, null=True, blank=True)
+    vendor = models.ForeignKey(
+        Vendor, on_delete=models.CASCADE, related_name='vendor', null=True, blank=True)
     date_created = models.DateTimeField(
         default=timezone.now, null=True, blank=True)
     amount = models.FloatField(null=True, blank=True)
@@ -143,16 +157,3 @@ class Salary(Base):
 
     def __str__(self):
         return str(self.staff)
-
-
-class Vendor(Base):
-    name = models.CharField(max_length=256, null=True, blank=True)
-    vendor_type = models.ForeignKey(
-        VendorType, on_delete=models.CASCADE, related_name='vendor_type')
-    phone_number = models.CharField(max_length=256, null=True, blank=True)
-    email = models.EmailField(null=True, blank=True)
-    status = models.CharField(choices=ACTIVITY_STATUS,
-                              max_length=255, null=True)
-
-    def __str__(self):
-        return str(self.name)

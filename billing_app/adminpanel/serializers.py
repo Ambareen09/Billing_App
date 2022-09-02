@@ -3,6 +3,7 @@ from pyexpat import model
 from rest_framework import serializers
 from adminpanel.models import (
     Billing,
+    Expense,
     Inventory
 )
 
@@ -20,4 +21,12 @@ class InventoryDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Inventory
+        fields = "__all__"
+
+
+class ExpenseDetailSerializer(serializers.ModelSerializer):
+    expense_detail = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Expense
         fields = "__all__"
