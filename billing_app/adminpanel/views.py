@@ -7,7 +7,8 @@ from adminpanel.models import Billing, Customer, Expense, ExpenseType, Inventory
 from adminpanel.serializers import (
     BillingDetailSerializer,
     ExpenseDetailSerializer,
-    InventoryDetailSerializer
+    InventoryDetailSerializer,
+    SalaryDetailSerializer
 )
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -111,6 +112,26 @@ class SalaryView(BaseAPIView):
             "adminpanel/salary.html",
             {"salary": salary},
         )
+
+
+class AddSalaryView(BaseAPIView):
+    def get(self, request):
+        staff_type = get_obj(Staff)
+        pay_mode = get_obj(PayMode)
+
+        return render(
+            request,
+            "adminpanel/addsalary.html",
+            {"staff_type": staff_type,
+             "pay_mode": pay_mode},
+        )
+
+    def post(self, request):
+        serializer = SalaryDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('/salary')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PendingBillsView(BaseAPIView):

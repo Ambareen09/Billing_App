@@ -18,6 +18,8 @@ urlpatterns = [
          name="addexpense"),
     path("salary", views.SalaryView.as_view(),
          name="salary"),
+    path("addsalary", views.AddSalaryView.as_view(),
+         name="addsalary"),
     path("pendingbills", views.PendingBillsView.as_view(),
          name="pendingbills"),
     path("viewunpaidbill", views.ViewPendingBillsView.as_view(),

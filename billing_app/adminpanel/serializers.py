@@ -4,7 +4,8 @@ from rest_framework import serializers
 from adminpanel.models import (
     Billing,
     Expense,
-    Inventory
+    Inventory,
+    Salary
 )
 
 
@@ -29,4 +30,12 @@ class ExpenseDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Expense
+        fields = "__all__"
+
+
+class SalaryDetailSerializer(serializers.ModelSerializer):
+    expense_detail = serializers.StringRelatedField(read_only=True)
+
+    class Meta:
+        model = Salary
         fields = "__all__"
