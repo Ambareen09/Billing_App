@@ -3,12 +3,13 @@ import traceback
 
 from django.views import View
 from django.forms import model_to_dict
-from adminpanel.models import Billing, Customer, Expense, ExpenseType, Inventory, PayMode, Salary, Staff, Vendor
+from adminpanel.models import Billing, Customer, Expense, ExpenseType, Inventory, PayMode, Salary, Staff, Vendor, VendorType
 from adminpanel.serializers import (
     BillingDetailSerializer,
     ExpenseDetailSerializer,
     InventoryDetailSerializer,
-    SalaryDetailSerializer
+    SalaryDetailSerializer,
+    VendorDetailSerializer
 )
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -167,6 +168,22 @@ class ViewVendorView(BaseAPIView):
 class AddVendorView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addvendor.html")
+
+    def get(self, request):
+        vendor_type_name = get_obj(VendorType)
+
+        return render(
+            request,
+            "adminpanel/addvendor.html",
+            {"vendor_type_name": vendor_type_name}
+        )
+
+    def post(self, request):
+        serializer = VendorDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('/vendor')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class StaffView(BaseAPIView):
