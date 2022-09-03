@@ -130,7 +130,7 @@ class ViewExpenseView(BaseAPIView):
                 {"Error": "Expense does not exist"}, status=status.HTTP_404_NOT_FOUND
             )
         expense = Expense.objects.get(pk=pk)
-        serializer = BillingDetailSerializer(
+        serializer = ExpenseDetailSerializer(
             expense, context={"request": request})
         return render(
             request,
@@ -188,6 +188,22 @@ class AddSalaryView(BaseAPIView):
             serializer.save()
             return redirect('/salary')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ViewSalaryView(BaseAPIView):
+    def get(self, request, pk):
+        if not Salary.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Salary does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        salary = Salary.objects.get(pk=pk)
+        serializer = SalaryDetailSerializer(
+            salary, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewsalary.html",
+            {"s": salary},
+        )
 
 
 class PendingBillsView(BaseAPIView):
@@ -301,8 +317,3 @@ class ViewCustomerView(BaseAPIView):
 class AddStockView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addstock.html")
-
-
-class ViewSalaryView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewsalary.html")
