@@ -46,7 +46,7 @@ urlpatterns = [
 
     path("vendor", views.VendorView.as_view(),
          name="vendor"),
-    path("viewvendor", views.ViewVendorView.as_view(),
+    path("viewvendor/<str:pk>", views.ViewVendorView.as_view(),
          name="viewvendor"),
     path("addvendor", views.AddVendorView.as_view(),
          name="addvendor"),

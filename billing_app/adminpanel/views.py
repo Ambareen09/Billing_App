@@ -232,8 +232,19 @@ class VendorView(BaseAPIView):
 
 
 class ViewVendorView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewvendor.html")
+    def get(self, request, pk):
+        if not Vendor.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Vendor does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        vendor = Vendor.objects.get(pk=pk)
+        serializer = VendorDetailSerializer(
+            vendor, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewvendor.html",
+            {"v": vendor},
+        )
 
 
 class AddVendorView(BaseAPIView):

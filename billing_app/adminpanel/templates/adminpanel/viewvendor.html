@@ -29,7 +29,7 @@
               <div class="d-flex justify-content-between col-md-6">
                 <h5>Vendor Detail</h5>
                 <div class="dropdown">
-                  <a href="editexpense" class="btn btn-primary">Edit</a>
+                  <a href="/editexpense" class="btn btn-primary">Edit</a>
                   <button type="button" class="ms-md-2 mt-md-0 btn border-danger text-danger">Delete</button>
                 </div>
               </div>
@@ -40,32 +40,32 @@
                   <tr>
                     <td class="text-start">Vendor Name</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">Vetrivel</td>
+                    <td class="text-start ps-3">{{v.name}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Vendor ID</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">VI8736</td>
+                    <td class="text-start ps-3">{{v.id}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Vendor Type</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">Supplier</td>
+                    <td class="text-start ps-3">{{v.vendor_type}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Phone Number</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">+91 7654467654</td>
+                    <td class="text-start ps-3">{{v.phone_number}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Email ID</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">vetrivel@gmail.com</td>
+                    <td class="text-start ps-3">{{v.email}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Status</td>
                     <td class="text-start">:</td>
-                    <td class="text-start text-success ps-3">Active</td>
+                    <td class="text-start text-success ps-3">{{v.status}}</td>
                   </tr>
                 </table>
               </div>
@@ -99,8 +99,8 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>
