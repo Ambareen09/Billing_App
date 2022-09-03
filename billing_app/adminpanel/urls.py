@@ -64,7 +64,7 @@ urlpatterns = [
          name="customer"),
     path("addcustomer", views.AddCustomerView.as_view(),
          name="addcustomer"),
-    path("viewcustomer", views.ViewCustomerView.as_view(),
+    path("viewcustomer/<str:pk>", views.ViewCustomerView.as_view(),
          name="viewcustomer"),
 
 

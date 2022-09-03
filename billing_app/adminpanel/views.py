@@ -332,8 +332,19 @@ class AddCustomerView(BaseAPIView):
 
 
 class ViewCustomerView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewcustomer.html")
+    def get(self, request, pk):
+        if not Customer.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Customer does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        customer = Customer.objects.get(pk=pk)
+        serializer = CustomerDetailSerializer(
+            customer, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewcustomer.html",
+            {"c": customer},
+        )
 
 
 class AddStockView(BaseAPIView):
