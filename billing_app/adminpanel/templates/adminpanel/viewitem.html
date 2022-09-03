@@ -23,7 +23,6 @@
         <!-- Content wrapper -->
         <div class="table-wrapper">
           <!-- Content -->
-
           <div class="m-md-4 m-2 mt-5">
             <div class="row">
               <div class="col">
@@ -42,27 +41,27 @@
                   <tr>
                     <td class="text-start">Item Name</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">Engine Oil</td>
+                    <td class="text-start ps-3">{{i.item_name}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Item Code</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">CA123</td>
+                    <td class="text-start ps-3">{{i.item_code}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Manufacturer</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">Castrol</td>
+                    <td class="text-start ps-3">{{i.manufacturer}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Item Tax</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">5%</td>
+                    <td class="text-start ps-3">{{i.item_tax}}%</td>
                   </tr>
                   <tr>
                     <td class="text-start">Retail Price</td>
                     <td class="text-start">:</td>
-                    <td class="text-start ps-3">₹ 500</td>
+                    <td class="text-start ps-3">₹ {{i.retail_price}}</td>
                   </tr>
                   <tr>
                     <td class="text-start">Total Stock</td>
@@ -134,8 +133,8 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

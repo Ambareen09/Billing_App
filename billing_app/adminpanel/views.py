@@ -3,12 +3,14 @@ import traceback
 
 from django.views import View
 from django.forms import model_to_dict
-from adminpanel.models import Billing, Customer, Expense, ExpenseType, Inventory, PayMode, Salary, Staff, Vendor, VendorType
+from adminpanel.models import Billing, Customer, Expense, ExpenseType, Inventory, PayMode, Salary, Staff, StaffType, Vendor, VendorType
 from adminpanel.serializers import (
     BillingDetailSerializer,
+    CustomerDetailSerializer,
     ExpenseDetailSerializer,
     InventoryDetailSerializer,
     SalaryDetailSerializer,
+    StaffDetailSerializer,
     VendorDetailSerializer
 )
 from django.http import HttpResponse
@@ -59,6 +61,38 @@ class AddInventoryView(BaseAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ItemView(BaseAPIView):
+    def get(self, request, pk):
+        if not Inventory.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "item does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        item = Inventory.objects.get(pk=pk)
+        serializer = InventoryDetailSerializer(
+            item, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewitem.html",
+            {"i": item},
+        )
+
+
+class BillView(BaseAPIView):
+    def get(self, request, pk):
+        if not Billing.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "bill does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        bill = Billing.objects.get(pk=pk)
+        serializer = BillingDetailSerializer(
+            bill, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewbill.html",
+            {"b": bill},
+        )
+
+
 class AddBillingView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addbilling.html")
@@ -81,6 +115,27 @@ class ExpenseView(BaseAPIView):
             request,
             "adminpanel/expense.html",
             {"expense": expense},
+        )
+
+
+class EditExpenseView(BaseAPIView):
+    def get(self, request):
+        return render(request, "adminpanel/editexpense.html")
+
+
+class ViewExpenseView(BaseAPIView):
+    def get(self, request, pk):
+        if not Expense.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Expense does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        expense = Expense.objects.get(pk=pk)
+        serializer = BillingDetailSerializer(
+            expense, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewexpense.html",
+            {"e": expense},
         )
 
 
@@ -198,7 +253,17 @@ class StaffView(BaseAPIView):
 
 class AddStaffView(BaseAPIView):
     def get(self, request):
-        return render(request, "adminpanel/addstaff.html")
+        staff_type_name = get_obj(StaffType)
+        return render(request,
+                      "adminpanel/addstaff.html",
+                      {"staff_type_name": staff_type_name})
+
+    def post(self, request):
+        serializer = StaffDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('/staff')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ViewStaffView(BaseAPIView):
@@ -215,12 +280,17 @@ class CustomerView(BaseAPIView):
             {"customer": customer},
         )
 
-        return render(request, "adminpanel/customer.html")
-
 
 class AddCustomerView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addcustomer.html")
+
+    def post(self, request):
+        serializer = CustomerDetailSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('/customer')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ViewCustomerView(BaseAPIView):
@@ -228,31 +298,11 @@ class ViewCustomerView(BaseAPIView):
         return render(request, "adminpanel/viewcustomer.html")
 
 
-class ItemView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/addviewitem.html")
-
-
 class AddStockView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addstock.html")
 
 
-class BillView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewbill.html")
-
-
 class ViewSalaryView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/viewsalary.html")
-
-
-class EditExpenseView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/editexpense.html")
-
-
-class ViewExpenseView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewexpense.html")

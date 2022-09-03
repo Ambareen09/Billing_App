@@ -37,6 +37,7 @@
                 <thead>
                   <tr>
                     <th>Item Name</th>
+                    <th>Item ID</th>
                     <th>Item Code</th>
                     <th>Manufacturer</th>
                     <th>Total Stock</th>
@@ -52,6 +53,7 @@
                   {% for i in inventory %}
                   <tr>
                     <td>{{i.item_name}}</td>
+                    <td>{{i.id}}</td>
                     <td>{{i.item_code}}</td>
                     <td>{{i.manufacturer}}</td>
                     <td>{{i.item_name}}</td>
@@ -63,7 +65,7 @@
                       <div class="dropdown">
                         <a href="addstock" class="btn btn-primary me-md-2">Add Stock</button>
                         </a>
-                        <a href="viewitem" class="btn btn-outline-primary">View Detail</button>
+                        <a href="/viewitem/{{i.id}}" class="btn btn-outline-primary">View Detail</button>
                         </a>
                       </div>
                     </td>
