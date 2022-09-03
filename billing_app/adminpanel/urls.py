@@ -56,7 +56,7 @@ urlpatterns = [
          name="staff"),
     path("addstaff", views.AddStaffView.as_view(),
          name="addstaff"),
-    path("viewstaff", views.ViewStaffView.as_view(),
+    path("viewstaff/<str:pk>", views.ViewStaffView.as_view(),
          name="viewstaff"),
 
 

@@ -294,8 +294,19 @@ class AddStaffView(BaseAPIView):
 
 
 class ViewStaffView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/viewstaff.html")
+    def get(self, request, pk):
+        if not Staff.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Staff does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        staff = Staff.objects.get(pk=pk)
+        serializer = StaffDetailSerializer(
+            staff, context={"request": request})
+        return render(
+            request,
+            "adminpanel/viewstaff.html",
+            {"s": staff},
+        )
 
 
 class CustomerView(BaseAPIView):
