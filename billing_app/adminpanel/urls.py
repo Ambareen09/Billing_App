@@ -10,6 +10,8 @@ urlpatterns = [
          name="addinventory"),
     path("viewitem/<str:pk>", views.ItemView.as_view(),
          name="viewitem"),
+    path("edititem/<str:pk>", views.EdititemView.as_view(),
+         name="viewitem"),
 
 
     path("addbilling", views.AddBillingView.as_view(),

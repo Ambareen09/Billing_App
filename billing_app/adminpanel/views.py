@@ -77,6 +77,31 @@ class ItemView(BaseAPIView):
         )
 
 
+class EdititemView(BaseAPIView):
+    def get(self, request, pk):
+        if not Inventory.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "item does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        item = Inventory.objects.get(pk=pk)
+        serializer = InventoryDetailSerializer(
+            item, context={"request": request})
+        return render(
+            request,
+            "adminpanel/edititem.html",
+            {"i": item},
+        )
+
+    def put(self, request, pk):
+        item = Inventory.objects.get(pk=pk)
+        serializer = InventoryDetailSerializer(item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class BillView(BaseAPIView):
     def get(self, request, pk):
         if not Billing.objects.filter(pk=pk).exists():
