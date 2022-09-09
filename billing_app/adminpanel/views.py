@@ -144,8 +144,31 @@ class ExpenseView(BaseAPIView):
 
 
 class EditExpenseView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/editexpense.html")
+    def get(self, request, pk):
+        if not Expense.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Expense does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        expense = Expense.objects.get(pk=pk)
+        expense_type = get_obj(ExpenseType)
+        vendor_name = get_obj(Vendor)
+        pay_mode = get_obj(PayMode)
+
+        return render(
+            request,
+            "adminpanel/editexpense.html",
+            {"expense_type": expense_type, "ex": expense, "vendor_name": vendor_name,
+                "pay_mode": pay_mode},
+        )
+
+    def put(self, request, pk):
+        expense = Expense.objects.get(pk=pk)
+        serializer = ExpenseDetailSerializer(expense, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ViewExpenseView(BaseAPIView):

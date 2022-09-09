@@ -26,7 +26,7 @@ urlpatterns = [
          name="expense"),
     path("addexpense", views.AddExpenseView.as_view(),
          name="addexpense"),
-    path("editexpense", views.EditExpenseView.as_view(),
+    path("editexpense/<str:pk>", views.EditExpenseView.as_view(),
          name="editexpense"),
     path("viewexpense/<str:pk>", views.ViewExpenseView.as_view(),
          name="viewexpense"),
