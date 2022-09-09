@@ -62,6 +62,8 @@ urlpatterns = [
          name="staff"),
     path("addstaff", views.AddStaffView.as_view(),
          name="addstaff"),
+    path("editstaff/<str:pk>", views.EditStaffView.as_view(),
+         name="editstaff"),
     path("viewstaff/<str:pk>", views.ViewStaffView.as_view(),
          name="viewstaff"),
 

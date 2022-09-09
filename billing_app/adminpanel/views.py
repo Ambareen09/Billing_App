@@ -377,6 +377,32 @@ class StaffView(BaseAPIView):
         )
 
 
+class EditStaffView(BaseAPIView):
+    def get(self, request, pk):
+        if not Staff.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Staff does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        staff = Staff.objects.get(pk=pk)
+        staff_type_name = get_obj(StaffType)
+        serializer = StaffDetailSerializer(
+            staff, context={"request": request})
+        return render(
+            request,
+            "adminpanel/editstaff.html",
+            {"s": staff, "staff_type_name": staff_type_name},
+        )
+
+    def put(self, request, pk):
+        staff = Staff.objects.get(pk=pk)
+        serializer = StaffDetailSerializer(staff, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class AddStaffView(BaseAPIView):
     def get(self, request):
         staff_type_name = get_obj(StaffType)
