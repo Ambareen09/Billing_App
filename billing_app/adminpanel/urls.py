@@ -36,6 +36,8 @@ urlpatterns = [
          name="salary"),
     path("addsalary", views.AddSalaryView.as_view(),
          name="addsalary"),
+    path("editsalary/<str:pk>", views.EditSalaryView.as_view(),
+         name="editsalary"),
     path("viewsalary/<str:pk>", views.ViewSalaryView.as_view(),
          name="viewsalary"),
 

@@ -250,8 +250,35 @@ class ViewSalaryView(BaseAPIView):
         return render(
             request,
             "adminpanel/viewsalary.html",
-            {"s": salary},
+            {"s": salary, },
         )
+
+
+class EditSalaryView(BaseAPIView):
+    def get(self, request, pk):
+        if not Salary.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Salary does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        salary = Salary.objects.get(pk=pk)
+        staff_type = get_obj(Staff)
+        pay_mode = get_obj(PayMode)
+
+        return render(
+            request,
+            "adminpanel/editsalary.html",
+            {"s": salary, "staff_type": staff_type,
+             "pay_mode": pay_mode},
+        )
+
+    def put(self, request, pk):
+        salary = Salary.objects.get(pk=pk)
+        serializer = SalaryDetailSerializer(salary, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PendingBillsView(BaseAPIView):
