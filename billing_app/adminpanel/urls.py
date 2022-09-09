@@ -52,6 +52,8 @@ urlpatterns = [
          name="vendor"),
     path("viewvendor/<str:pk>", views.ViewVendorView.as_view(),
          name="viewvendor"),
+    path("editvendor/<str:pk>", views.EditVendorView.as_view(),
+         name="editvendor"),
     path("addvendor", views.AddVendorView.as_view(),
          name="addvendor"),
 

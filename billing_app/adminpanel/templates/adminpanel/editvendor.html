@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'adminpanel/base.html' %}
+
+<body>
+
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu -->
+
+            {% include 'adminpanel/menu.html'%}
+
+            <!-- / Menu -->
+
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+
+                {% include 'adminpanel/navBar.html'%}
+
+                <!-- / Navbar -->
+
+                <!-- Content wrapper -->
+                <div class="table-wrapper">
+                    <!-- Content -->
+
+                    <div class="m-md-5 m-2 mt-4">
+                        <div>
+                            <div>
+                                <div class="container-md" style="max-width: 500px;">
+                                    <div>
+                                        <h5>Edit Vendor</h5>
+                                    </div>
+                                    <div style="padding-top: 5px;">
+                                        <div>
+                                            <form id="edit-vendor" role="form" enctype="multipart/form-data">
+                                                <input type="hidden" name="csrfmiddlewaretoken"
+                                                    value="{{ csrf_token }}">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Vendor Name</label>
+                                                            <input name="name" value="{{v.name}}" class="form-control"
+                                                                type="text">
+                                                        </div>
+                                                        <!-- <div class="mb-3">
+                              <label class="form-label">Vendor ID</label>
+                              <input name="" class="form-control" type="text">
+                            </div> -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Vendor Type</label>
+                                                            <select name="vendor_type" class="form-select me-4"
+                                                                autocomplete="on" aria-label="Default select example">
+                                                                {% for ve in vendor_type_name %}
+                                                                <option value="{{ve.id}}" {% if v.vendor == ve %}
+                                                                    selected{% endif %}>{{ ve.name}}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Phone Number</label>
+                                                            <input name="phone_number" type="number"
+                                                                value="{{ v.phone_number}}" class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Email ID</label>
+                                                            <input name="email" value="{{v.email}}" type="email"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Vendor Type</label>
+                                                            <select name="status" class="form-select me-4"
+                                                                autocomplete="on" aria-label="Default select example">
+
+                                                                <option value="ACTIVE" {% if v.status == "ACTIVE" %}
+                                                                    selected{% endif %}>ACTIVE</option>
+                                                                <option value="INACTIVE" {% if v.status == "INACTIVE" %}
+                                                                    selected{% endif %}>INACTIVE</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-100 mt-3 d-flex justify-content-center">
+                                                    <input class="btn btn-success" type="button" value="Submit"
+                                                        onclick="updateItem('{{v.id}}')" />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Content -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <script>
+        function updateItem(itemId) {
+            $form = $('#edit-vendor');
+            var formData = $form.serialize();
+            console.log(formData);
+            var data
+            $.ajax({
+                url: `/editvendor/${itemId}`,
+                type: 'PUT',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                data: formData,
+                processData: false,
+                success: function () {
+                    window.location = "/vendor";
+                }
+
+            })
+        }
+    </script>
+
+    {% include 'adminpanel/footerJS.html' %}
+</body>
+
+</html>

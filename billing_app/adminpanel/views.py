@@ -322,9 +322,33 @@ class ViewVendorView(BaseAPIView):
         )
 
 
+class EditVendorView(BaseAPIView):
+    def get(self, request, pk):
+        if not Vendor.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Vendor does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        vendor = Vendor.objects.get(pk=pk)
+        vendor_type_name = get_obj(VendorType)
+        serializer = VendorDetailSerializer(
+            vendor, context={"request": request})
+        return render(
+            request,
+            "adminpanel/editvendor.html",
+            {"v": vendor, "vendor_type_name": vendor_type_name},
+        )
+
+    def put(self, request, pk):
+        vendor = Vendor.objects.get(pk=pk)
+        serializer = VendorDetailSerializer(vendor, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class AddVendorView(BaseAPIView):
-    def get(self, request):
-        return render(request, "adminpanel/addvendor.html")
 
     def get(self, request):
         vendor_type_name = get_obj(VendorType)
