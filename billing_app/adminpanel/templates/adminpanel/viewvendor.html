@@ -23,14 +23,15 @@
         <!-- Content wrapper -->
         <div class="table-wrapper">
           <!-- Content -->
-
+          <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
           <div class="m-md-5 m-2 mt-5">
             <div class="row">
               <div class="d-flex justify-content-between col-md-6">
                 <h5>Vendor Detail</h5>
                 <div class="dropdown">
                   <a href="/editvendor/{{v.id}}" class="btn btn-primary">Edit</a>
-                  <button type="button" class="ms-md-2 mt-md-0 btn border-danger text-danger">Delete</button>
+                  <button type="button" onclick="deleteProduct('{{v.id}}')"
+                    class="ms-md-2 mt-md-0 mt-2 btn border-danger text-danger">Delete</button>
                 </div>
               </div>
             </div>
@@ -84,6 +85,24 @@
     <div class="layout-overlay layout-menu-toggle"></div>
   </div>
   <!-- / Layout wrapper -->
+  <script>
+    function deleteProduct(itemId) {
+      sure = confirm("Are you sure to execute this action?");
+      if (!sure) {
+        return;
+      }
+      $.ajax({
+        url: `/editvendor/${itemId}`,
+        type: 'DELETE',
+        headers: {
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        success: function () {
+          window.location = "/vendor";
+        }
+      })
+    }
+  </script>
 
   {% include 'adminpanel/footerJS.html' %}
 </body>

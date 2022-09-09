@@ -175,6 +175,11 @@ class EditExpenseView(BaseAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk):
+        if Expense.objects.filter(pk=pk).exists():
+            Expense.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
+
 
 class ViewExpenseView(BaseAPIView):
     def get(self, request, pk):
@@ -285,6 +290,11 @@ class EditSalaryView(BaseAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk):
+        if Salary.objects.filter(pk=pk).exists():
+            Salary.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
+
 
 class PendingBillsView(BaseAPIView):
     def get(self, request):
@@ -352,6 +362,11 @@ class EditVendorView(BaseAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk):
+        if Vendor.objects.filter(pk=pk).exists():
+            Vendor.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
+
 
 class AddVendorView(BaseAPIView):
 
@@ -406,6 +421,11 @@ class EditStaffView(BaseAPIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        if Staff.objects.filter(pk=pk).exists():
+            Staff.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
 
 
 class AddStaffView(BaseAPIView):
@@ -471,6 +491,11 @@ class EditCustomerView(BaseAPIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        if Customer.objects.filter(pk=pk).exists():
+            Customer.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
 
 
 class AddCustomerView(BaseAPIView):
