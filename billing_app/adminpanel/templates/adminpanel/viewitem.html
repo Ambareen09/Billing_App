@@ -22,6 +22,7 @@
 
         <!-- Content wrapper -->
         <div class="table-wrapper">
+          <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
           <!-- Content -->
           <div class="m-md-4 m-2 mt-5">
             <div class="row">
@@ -31,7 +32,8 @@
               <div class="col text-end">
                 <div class="dropdown">
                   <a href="/edititem/{{i.id}}" class="btn btn-primary">Edit</a>
-                  <button type="button" class="ms-md-2 mt-md-0 mt-2 btn border-danger text-danger">Delete</button>
+                  <button type="button" onclick="deleteProduct('{{i.id}}')"
+                    class="ms-md-2 mt-md-0 mt-2 btn border-danger text-danger">Delete</button>
                 </div>
               </div>
             </div>
@@ -119,6 +121,24 @@
   </div>
   <!-- / Layout wrapper -->
 
+  <script>
+    function deleteProduct(itemId) {
+      sure = confirm("Are you sure to execute this action?");
+      if (!sure) {
+        return;
+      }
+      $.ajax({
+        url: `/edititem/${itemId}`,
+        type: 'DELETE',
+        headers: {
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        success: function () {
+          window.location = "/viewinventory";
+        }
+      })
+    }
+  </script>
   {% include 'adminpanel/footerJS.html' %}
 </body>
 

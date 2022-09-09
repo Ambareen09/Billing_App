@@ -101,6 +101,11 @@ class EdititemView(BaseAPIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk):
+        if Inventory.objects.filter(pk=pk).exists():
+            Inventory.objects.get(pk=pk).delete()
+        return HttpResponse({"msg": "successful"})
+
 
 class BillView(BaseAPIView):
     def get(self, request, pk):
