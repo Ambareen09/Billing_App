@@ -444,6 +444,30 @@ class CustomerView(BaseAPIView):
         )
 
 
+class EditCustomerView(BaseAPIView):
+    def get(self, request, pk):
+        if not Customer.objects.filter(pk=pk).exists():
+            return Response(
+                {"Error": "Customer does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        customer = Customer.objects.get(pk=pk)
+
+        return render(
+            request,
+            "adminpanel/editcustomer.html",
+            {"c": customer},
+        )
+
+    def put(self, request, pk):
+        customer = Customer.objects.get(pk=pk)
+        serializer = CustomerDetailSerializer(customer, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class AddCustomerView(BaseAPIView):
     def get(self, request):
         return render(request, "adminpanel/addcustomer.html")

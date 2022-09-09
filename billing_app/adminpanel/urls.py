@@ -72,6 +72,8 @@ urlpatterns = [
          name="customer"),
     path("addcustomer", views.AddCustomerView.as_view(),
          name="addcustomer"),
+    path("editcustomer/<str:pk>", views.EditCustomerView.as_view(),
+         name="editcustomer"),
     path("viewcustomer/<str:pk>", views.ViewCustomerView.as_view(),
          name="viewcustomer"),
 
