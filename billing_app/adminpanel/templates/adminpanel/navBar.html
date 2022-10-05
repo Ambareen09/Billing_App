@@ -27,8 +27,13 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">Vetrivel</span>
-                                    <small class="text-muted">Staff</small>
+                                    {% if user.is_authenticated %}
+                                    <span class="fw-semibold d-block">Welcome, {{ user.get_username }}</span>
+                                    {% else %}
+                                    <span class="fw-semibold d-block">Welcome, new user. Please log in.</span>
+                                    {% endif %}
+                                    <!-- <span class="fw-semibold d-block">Vetrivel</span>
+                                    <small class="text-muted">Staff</small> -->
                                 </div>
                             </div>
                         </a>
@@ -37,9 +42,15 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="login">
+                        {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">
                             <span class="align-middle">Log Out</span>
                         </a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'login' %}">
+                            <span class="align-middle">Log In</span>
+                        </a>
+                        {% endif %}
                     </li>
                 </ul>
             </li>
