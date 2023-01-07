@@ -47,3 +47,9 @@ python manage.py runserver
 ```
 python manage.py createsuperuser
 ```
+
+### Extra resources for detailed documentation on Django
+
+[Django documentation](https://docs.djangoproject.com/en/4.1/)
+
+[Django Rest Framework](https://www.django-rest-framework.org/)
