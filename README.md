@@ -27,3 +27,23 @@ source env/bin/activate
 ```
 pip install -r requirements.txt
 ```
+
+3. Go to the billing_app folder
+
+```
+cd billing_app
+```
+
+4. Set up the database and server and make it up and running
+
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+5. To create superadmin
+
+```
+python manage.py createsuperuser
+```
