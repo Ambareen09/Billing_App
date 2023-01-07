@@ -2,7 +2,9 @@
 
 ## What is it?
 
-An Adminpanel dashboard for an E-commerce app. Anyone can use this tempalate and integrate it with their working store-front. Feel free to star this repo if it was of any help!
+- An Adminpanel dashboard for an E-commerce app. Anyone can use this tempalate and integrate it with their working store-front. Feel free to star this repo if it was of any help!
+- Inventory management system
+
 
 ## Steps to run this on your localhost
 
@@ -53,3 +55,7 @@ python manage.py createsuperuser
 [Django documentation](https://docs.djangoproject.com/en/4.1/)
 
 [Django Rest Framework](https://www.django-rest-framework.org/)
+
+## FUTURE WORK
+- Payment integration
+- Filtering the billing history
